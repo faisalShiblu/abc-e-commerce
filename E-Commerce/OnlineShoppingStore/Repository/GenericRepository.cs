@@ -25,6 +25,10 @@ namespace OnlineShoppingStore.Repository
             _db.SaveChanges();
         }
 
+        public IEnumerable<Tbl_Entity> GetProduct()
+        {
+            return _dbSet.ToList();
+        }
         public int GetAllrecordCount()
         {
             return _dbSet.Count();
@@ -96,6 +100,7 @@ namespace OnlineShoppingStore.Repository
         {
             _dbSet.Attach(entity);
             _db.Entry(entity).State = EntityState.Modified;
+            _db.SaveChanges();
         }
 
         public void UpdateByWhereClause(Expression<Func<Tbl_Entity, bool>> wherePredict, Action<Tbl_Entity> ForEachPredict)
