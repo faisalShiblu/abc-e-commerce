@@ -89,8 +89,11 @@
                     <p>
                         @if (item.Quantity > 0)
                         {
+                            using (Html.BeginForm("AddToCart", "Home", new { productId = item.ProductId }, FormMethod.Post))
+                            {
+                                <button type="submit" class="pull-right"><i class="fa fa-shopping-cart"></i></button>
+                            }
                             <span>Available</span>
-
                         }
                         else
                         {
