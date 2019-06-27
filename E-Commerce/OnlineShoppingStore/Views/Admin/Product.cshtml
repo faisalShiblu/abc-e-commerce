@@ -1,4 +1,4 @@
-﻿@model IEnumerable<OnlineShoppingStore.DAL.Tbl_Product>
+﻿@model List<OnlineShoppingStore.DAL.Tbl_Product>
 
 @{
     ViewBag.Title = "Product";
@@ -25,17 +25,13 @@
                 <tbody>
                     @foreach (var item in Model)
                     {
-                        int count = 1;
                         <tr>
-                            <td>@count</td>
+                            <td>@(Model.IndexOf(item) + 1)</td>
                             <td>@item.ProductName</td>
                             <td>
-                           
                                 @Html.ActionLink("Edit", "ProductEdit", new { productId = item.ProductId })
                             </td>
-
                         </tr>
-                        count++;
                     }
 
                 </tbody>
