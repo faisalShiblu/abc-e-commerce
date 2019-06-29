@@ -39,20 +39,44 @@ namespace OnlineShoppingStore.Controllers
             else
             {
                 List<Item> cart = (List<Item>)Session["cart"];
-                //var product = _db.Tbl_Product.Find(productId);
+                var product = _db.Tbl_Product.Find(productId);
 
-                foreach (var item in cart)
+                bool isExist = cart.Any(x => x.Product.ProductId == productId);
+
+                if (isExist)
                 {
-                    if (item.Product.ProductId == productId)
+                    foreach (var item in cart)
                     {
-                        item.Quantity++;
+                        if (item.Product.ProductId == productId)
+                        {
+                            item.Quantity++;
+                            //int preQty = item.Quantity;
+                            //cart.Remove(item);
+                            //cart.Add(new Item()
+                            //{
+                            //    Product = product,
+                            //    Quantity = preQty + 1
+                            //});
+                            //break;
+                        }
+                        //else
+                        //{
+                        //    cart.Add(new Item()
+                        //    {
+                        //        Product = product,
+                        //        Quantity = 1
+                        //    });
+                        //}
                     }
                 }
-                //cart.Add(new Item()
-                //{
-                //    Product = product,
-                //    Quantity = 1
-                //});
+                else
+                {
+                    cart.Add(new Item()
+                    {
+                        Product = product,
+                        Quantity = 1
+                    });
+                }
                 Session["cart"] = cart;
             }
             return Redirect("Index");
